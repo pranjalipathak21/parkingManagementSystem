@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.parkingManagementSystem.entity.VehicleCategory;
 import com.parkingManagementSystem.service.VehicleCategoryService;
 
+@ControllerAdvice
 @RestController
 @CrossOrigin(origins = "*") // Allow requests from any origin
 @RequestMapping("/vehicle-categories")
@@ -32,6 +36,13 @@ public class VehicleCategoryController {
 		this.vehicleCategoryService = vehicleCategoryService;
 	}
 
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<String> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
+        // Extract the exception message and return it in the response
+        String errorMessage = ex.getRootCause().getMessage();
+        return ResponseEntity.badRequest().body(errorMessage);
+    }
+    
 	// Get all vehicle categories
 	@GetMapping
 	public ResponseEntity<List<VehicleCategory>> getAllVehicleCategories() {

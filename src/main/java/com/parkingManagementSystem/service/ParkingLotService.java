@@ -30,7 +30,6 @@ public class ParkingLotService {
 	}
 
 	public ParkingLot create(ParkingLot parkingLot) {
-		// You may want to add validation or additional logic here
 		return parkingLotRepository.save(parkingLot);
 	}
 

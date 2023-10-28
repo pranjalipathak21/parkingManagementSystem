@@ -31,3 +31,33 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Eclipse and Spring Tool Suite (STS) specific files/directories to be ignored
+
+# Directory where Eclipse stores its metadata
+.metadata
+
+# Build-related files
+bin/
+target/
+*.class
+*.war
+*.ear
+*.jar
+
+# Various configuration files
+.settings/
+.project
+.classpath
+.factorypath
+
+# Logs
+*.log
+logs/
+
+# OS or IDE-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore generated files and folders
+generated/
