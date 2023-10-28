@@ -61,3 +61,6 @@ Thumbs.db
 
 # Ignore generated files and folders
 generated/
+
+# Ignore target/classes folder
+target/classes/
