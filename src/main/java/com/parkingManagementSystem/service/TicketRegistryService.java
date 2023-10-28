@@ -62,4 +62,8 @@ public class TicketRegistryService {
 		Double fareAmount = (Double) query.getOutputParameterValue("fare_amount");
 		return fareAmount;
 	}
+	
+    public List<Object[]> getLotDailyRevenueByLotId(Long lotId) {
+        return ticketRegistryRepository.getLotDailyRevenueByLotId(lotId);
+    } 
 }

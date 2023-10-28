@@ -1,5 +1,9 @@
 package com.parkingManagementSystem.controller;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,6 +73,32 @@ public class TicketRegistryController {
 		List<TicketRegistry> tickets = ticketRegistryService.getAllTickets();
 		return new ResponseEntity<>(tickets, HttpStatus.OK);
 	}
+	
+
+    @GetMapping("/lotDailyRevenue")
+    public ResponseEntity<Map<String, String>> getLotDailyRevenueByLotId(@RequestParam Long lotId) {
+        List<Object[]> lotDailyRevenueDetails = ticketRegistryService.getLotDailyRevenueByLotId(lotId);
+        
+        if (!lotDailyRevenueDetails.isEmpty()) {
+			Map<String, String> revenueDetails = new HashMap<>();
+			
+			for (Object[] row : lotDailyRevenueDetails) {
+	            Integer revenueLotId = (Integer) row[0];
+	            Date revenueDate = (Date) row[1];
+	            BigInteger ticketsPaid = (BigInteger) row[2];
+	            BigDecimal revenueFare = (BigDecimal) row[3];
+				
+				revenueDetails.put("Lot_id", revenueLotId.toString());
+				revenueDetails.put("Date", revenueDate.toString());
+				revenueDetails.put("Tickets paid", ticketsPaid.toString());
+				revenueDetails.put("Total fare", revenueFare.toString());
+	        }
+
+	        return new ResponseEntity<>(revenueDetails, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+    }
 
 	@PostMapping
 	public ResponseEntity<TicketRegistry> createTicket(@RequestBody TicketRegistry ticket) {
