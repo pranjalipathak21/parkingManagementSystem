@@ -134,24 +134,28 @@ INSERT INTO Parking_Lot (Area, City, postal_code, Floors, Slots) VALUES
   ('TN04GH3456', null, '2023-09-16 19:15:00', 350, 'Paid', 1, 8, 4),
   ('UP06KL1234', '9998887777', null, 0, 'Pending', 3, 7, 4);
   
+    INSERT INTO Ticket_Registry (Vehicle_No, Phone_No, Entry_Time, Category_id, Employee_id, Lot_id) VALUES
+  ('MH01AB1256', '9876543210', '2023-10-27 16:00:00', 'Pending', 1, 2, 1);
+  
   select * from Ticket_Registry;
   
   
   
   
 DELIMITER //
-
 CREATE PROCEDURE ComputeTicketFare(
-    IN input_ticket_id INT
+    IN input_ticket_id INT,
+	OUT fare_amount DECIMAL(10, 2)
 )
 BEGIN
     UPDATE Ticket_Registry
     SET Exit_Time = CURRENT_TIMESTAMP
     WHERE Ticket_Id = input_ticket_id;
+	
+	SELECT Fare into fare_amount from Ticket_Registry WHERE Ticket_Id = input_ticket_id;
 END //
 
 DELIMITER ;
-
 
 
 
