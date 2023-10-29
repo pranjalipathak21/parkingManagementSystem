@@ -189,3 +189,20 @@ BEGIN
 END //
 
 DELIMITER ;
+
+
+
+
+
+
+
+
+CREATE VIEW Lot_Daily_Revenue AS
+SELECT Lot_Id AS Revenue_Lot_Id,
+ DATE(Entry_Time) AS Revenue_Date,
+ COUNT(*) AS Tickets_Paid,
+       SUM(Fare) AS Revenue_Fare
+
+FROM Ticket_Registry
+WHERE Payment_Status = 'PAID' -- Considering only paid tickets
+GROUP BY DATE(Entry_Time);
