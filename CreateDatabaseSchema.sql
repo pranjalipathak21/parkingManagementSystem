@@ -162,7 +162,7 @@ DELIMITER ;
 
 DELIMITER //
 
-CREATE TRIGGER calculate_fare_trigger02 
+CREATE TRIGGER calculate_fare_trigger
 BEFORE UPDATE ON Ticket_Registry
 FOR EACH ROW
 BEGIN
