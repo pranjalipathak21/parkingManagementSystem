@@ -10,17 +10,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import com.parkingManagementSystem.entity.Employee;
+import com.parkingManagementSystem.entity.ParkingLot;
 import com.parkingManagementSystem.entity.TicketRegistry;
+import com.parkingManagementSystem.entity.VehicleCategory;
+import com.parkingManagementSystem.repository.EmployeeRepository;
+import com.parkingManagementSystem.repository.ParkingLotRepository;
 import com.parkingManagementSystem.repository.TicketRegistryRepository;
+import com.parkingManagementSystem.repository.VehicleCategoryRepository;
 
 @Service
 public class TicketRegistryService {
-	@Autowired
-	private TicketRegistryRepository ticketRegistryRepository;
+
+	private final TicketRegistryRepository ticketRegistryRepository;
+	private final ParkingLotRepository parkingLotRepository;
+	private final EmployeeRepository employeeRepository;
+	private final VehicleCategoryRepository categoryRepository;
 	private final EntityManager entityManager;
 
-	public TicketRegistryService(EntityManager entityManager) {
+	@Autowired
+	public TicketRegistryService(EntityManager entityManager, TicketRegistryRepository ticketRegistryRepository,ParkingLotRepository parkingLotRepository, EmployeeRepository employeeRepository, VehicleCategoryRepository categoryRepository ) {
 		this.entityManager = entityManager;
+		this.ticketRegistryRepository = ticketRegistryRepository;
+		this.parkingLotRepository = parkingLotRepository;
+		this.employeeRepository = employeeRepository;
+		this.categoryRepository = categoryRepository;
 	}
 
 	public List<TicketRegistry> getAllTickets() {
@@ -32,7 +46,16 @@ public class TicketRegistryService {
 	}
 
 	public TicketRegistry createTicket(TicketRegistry ticket) {
-		return ticketRegistryRepository.save(ticket);
+		TicketRegistry createdTicket = ticketRegistryRepository.save(ticket);
+		
+		ParkingLot parkingLot = parkingLotRepository.findById(createdTicket.getLot().getLotId()).orElse(null);
+		createdTicket.setLot(parkingLot);
+		Employee employee = employeeRepository.findById(createdTicket.getEmployee().getEmployeeId()).orElse(null);
+		createdTicket.setEmployee(employee);
+		VehicleCategory category = categoryRepository.findById(createdTicket.getCategory().getCategoryId()).orElse(null);
+		createdTicket.setCategory(category);
+		
+		return createdTicket;
 	}
 
 	public TicketRegistry updatePaymentStatus(Long id, String paymentStatus) {

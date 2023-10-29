@@ -162,7 +162,7 @@ DELIMITER ;
 
 DELIMITER //
 
-CREATE TRIGGER calculate_fare_trigger
+CREATE TRIGGER calculate_fare_trigger02 
 BEFORE UPDATE ON Ticket_Registry
 FOR EACH ROW
 BEGIN
@@ -181,7 +181,7 @@ BEGIN
     
     IF fare_amount IS NOT NULL THEN
 		IF NEW.Fare = 0 and NEW.Payment_Status = 'PENDING' then
-			SET NEW.Fare = TIMESTAMPDIFF(HOUR, NEW.Entry_Time, COALESCE(NEW.Exit_Time, CURRENT_TIMESTAMP())) * fare_amount;
+			SET NEW.Fare = (TIMESTAMPDIFF(HOUR, NEW.Entry_Time, COALESCE(NEW.Exit_Time, CURRENT_TIMESTAMP())) + 1) * fare_amount;
             
             SET MESSAGE_TEXT = CONCAT( 'Computed fare is ', NEW.Fare) ;
         END IF;
