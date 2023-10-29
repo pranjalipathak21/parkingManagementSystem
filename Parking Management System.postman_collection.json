@@ -173,7 +173,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"area\": \"Medical District pune\",\r\n    \"city\": \"Pune\",\r\n    \"postalCode\": 411033,\r\n    \"floors\": 4,\r\n    \"slots\": 80\r\n}",
+					"raw": "{\r\n    \"area\": \"Baner\",\r\n    \"city\": \"Pune\",\r\n    \"postalCode\": 411045,\r\n    \"floors\": 5,\r\n    \"slots\": 50\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -206,7 +206,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/parking-lots/1",
+					"raw": "http://localhost:8080/parking-lots/11",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -214,7 +214,7 @@
 					"port": "8080",
 					"path": [
 						"parking-lots",
-						"1"
+						"11"
 					]
 				}
 			},
@@ -340,7 +340,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Anjali Pathak\",\r\n    \"aadharNo\": \"546789765\",\r\n    \"parkingLot\": {\r\n        \"lotId\": 3\r\n    },\r\n    \"role\": {\r\n        \"roleId\": 2\r\n    }\r\n}",
+					"raw": "{\r\n    \"name\": \"Gargi Patil\",\r\n    \"aadharNo\": \"543216789\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -374,7 +374,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Anjali Pathak\",\r\n    \"aadharNo\": \"546789765\",\r\n    \"parkingLot\": {\r\n        \"lotId\": 3\r\n    },\r\n    \"role\": {\r\n        \"roleId\": 2\r\n    }\r\n}",
+					"raw": "{\r\n    \"name\": \"Gargi Patil\",\r\n    \"aadharNo\": \"543216789\",\r\n    \"parkingLot\": {\r\n        \"lotId\": 11\r\n    },\r\n    \"role\": {\r\n        \"roleId\": 2\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -382,7 +382,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/employees/15",
+					"raw": "http://localhost:8080/employees/16",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -390,7 +390,7 @@
 					"port": "8080",
 					"path": [
 						"employees",
-						"15"
+						"16"
 					]
 				}
 			},
@@ -460,7 +460,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 11,\r\n    \"parkingLot\": {\r\n        \"lotId\": 2\r\n    },\r\n    \"vehicleCategory\": {\r\n        \"categoryId\": 2\r\n    },\r\n    \"ratePerHour\": 70\r\n}",
+					"raw": "{\r\n    \"id\": 11,\r\n    \"parkingLot\": {\r\n        \"lotId\": 11\r\n    },\r\n    \"vehicleCategory\": {\r\n        \"categoryId\": 4\r\n    },\r\n    \"ratePerHour\": 20\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -615,7 +615,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"vehicleNo\": \"MH14KW6638\",\r\n    \"phoneNo\": \"7350045474\",\r\n    \"category\": {\r\n        \"categoryId\": 1\r\n    },\r\n    \"employee\": {\r\n        \"employeeId\": 8\r\n    },\r\n    \"lot\": {\r\n        \"lotId\": 4\r\n    }\r\n}",
+					"raw": "{\r\n    \"vehicleNo\": \"MH12PP1234\",\r\n    \"category\": {\r\n        \"categoryId\": 1\r\n    },\r\n    \"employee\": {\r\n        \"employeeId\": 7\r\n    },\r\n    \"lot\": {\r\n        \"lotId\": 4\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -648,7 +648,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/ticketRegistry/generateExitTicket/4",
+					"raw": "http://localhost:8080/ticketRegistry/generateExitTicket/8",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -657,7 +657,46 @@
 					"path": [
 						"ticketRegistry",
 						"generateExitTicket",
-						"4"
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdatePaymentStatus",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"lotId\": 1,\r\n    \"area\": \"Central Business District\",\r\n    \"city\": \"Mumbai\",\r\n    \"postalCode\": 9999,\r\n    \"floors\": 5,\r\n    \"slots\": 50\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/ticketRegistry?id=8&paymentStatus=Paid",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ticketRegistry"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "8"
+						},
+						{
+							"key": "paymentStatus",
+							"value": "Paid"
+						}
 					]
 				}
 			},
@@ -675,7 +714,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/ticketRegistry/lotDailyRevenue?lotId=4",
+					"raw": "http://localhost:8080/ticketRegistry/lotDailyRevenue?lotId=3&employeeId=7",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -688,7 +727,11 @@
 					"query": [
 						{
 							"key": "lotId",
-							"value": "4"
+							"value": "3"
+						},
+						{
+							"key": "employeeId",
+							"value": "7"
 						}
 					]
 				}
